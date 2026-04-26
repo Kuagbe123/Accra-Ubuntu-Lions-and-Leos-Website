@@ -386,14 +386,14 @@ const App = () => {
                 )}
 
                 {currentPage === "activities" && (
-                    <section className="py-24 px-4 max-w-7xl mx-auto">
+                    <section aria-labelledby="activities-heading" className="py-24 px-4 max-w-7xl mx-auto">
                         <div className="text-center mb-20">
                             <span
                                 className={`text-sm font-black uppercase tracking-[0.3em] ${currentClub.accentColor} mb-4 block`}
                             >
                                 Community Impact
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-extrabold mb-6">
+                            <h2 id="activities-heading" className="text-4xl md:text-6xl font-extrabold mb-6">
                                 Service Projects
                             </h2>
                             <div
@@ -440,14 +440,14 @@ const App = () => {
                 )}
 
                 {currentPage === "recognition" && (
-                    <section className="py-24 px-4 max-w-5xl mx-auto">
+                    <section aria-labelledby="awards-heading" className="py-24 px-4 max-w-5xl mx-auto">
                         <div className="text-center mb-20">
                             <span
                                 className={`text-sm font-black uppercase tracking-[0.3em] ${currentClub.accentColor} mb-4 block`}
                             >
                                 Our Pride
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-extrabold mb-6">
+                            <h2 id="awards-heading" className="text-4xl md:text-6xl font-extrabold mb-6">
                                 Honors & Awards
                             </h2>
                             <div
@@ -483,14 +483,14 @@ const App = () => {
                 )}
 
                 {currentPage === "leadership" && (
-                    <section className="py-24 px-4 max-w-7xl mx-auto">
+                    <section aria-labelledby="leadership-heading" className="py-24 px-4 max-w-7xl mx-auto">
                         <div className="text-center mb-20">
                             <span
                                 className={`text-sm font-black uppercase tracking-[0.3em] ${currentClub.accentColor} mb-4 block`}
                             >
                                 Executive Board
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-extrabold mb-6">
+                            <h2 id="leadership-heading" className="text-4xl md:text-6xl font-extrabold mb-6">
                                 Our Leadership
                             </h2>
                             <div
@@ -526,10 +526,10 @@ const App = () => {
                 )}
 
                 {/* Contact Section */}
-                <section className="bg-gray-100 py-24 px-4">
+                <section aria-labelledby="contact-heading" className="bg-gray-100 py-24 px-4">
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                         <div>
-                            <h2 className="text-4xl font-extrabold mb-8 leading-tight">
+                            <h2 id="contact-heading" className="text-4xl font-extrabold mb-8 leading-tight">
                                 Connect with the <br />
                                 {activeTab === "lions" ? "Lions" : "Leos"} of Accra
                             </h2>
@@ -584,44 +584,52 @@ const App = () => {
                             >
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
+                                        <label htmlFor="first-name" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
                                             First Name
                                         </label>
                                         <input
+                                            id="first-name"
                                             type="text"
+                                            aria-required="true"
                                             className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
+                                        <label htmlFor="last-name" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
                                             Last Name
                                         </label>
                                         <input
+                                            id="last-name"
                                             type="text"
+                                            aria-required="true"
                                             className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                                         />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
+                                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
                                         Email Address
                                     </label>
                                     <input
+                                        id="email"
                                         type="email"
+                                        aria-required="true"
                                         className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
+                                    <label htmlFor="message" className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
                                         Message
                                     </label>
                                     <textarea
+                                        id="message"
                                         rows="4"
+                                        aria-required="true"
                                         className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"
                                     ></textarea>
                                 </div>
                                 <button
-                                    className={`w-full py-5 text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-xl transition-all ${currentClub.themeColor} ${currentClub.hoverColor} active:scale-95`}
+                                    className={`w-full py-5 text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-xl transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${currentClub.themeColor} ${currentClub.hoverColor} active:scale-95`}
                                 >
                                     Send Message
                                 </button>
