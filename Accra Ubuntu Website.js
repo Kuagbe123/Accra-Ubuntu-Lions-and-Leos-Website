@@ -40,17 +40,17 @@ const App = () => {
                 {
                     title: "Club of the Year 2022/2023",
                     body: "Awarded by District 418 for excellence in service and administration.",
-                    icon: <Award className="w-8 h-8 text-yellow-500" />,
+                    icon: <Award className="w-8 h-8 text-yellow-500" aria-hidden="true" />,
                 },
                 {
                     title: "Global Service Action Award",
                     body: "Recognized for impactful projects in vision and hunger relief.",
-                    icon: <Globe className="w-8 h-8 text-blue-500" />,
+                    icon: <Globe className="w-8 h-8 text-blue-500" aria-hidden="true" />,
                 },
                 {
                     title: "Top Membership Growth",
                     body: "Consistently growing our pride to serve more communities.",
-                    icon: <Users className="w-8 h-8 text-green-500" />,
+                    icon: <Users className="w-8 h-8 text-green-500" aria-hidden="true" />,
                 },
             ],
             activities: [
@@ -90,12 +90,12 @@ const App = () => {
                 {
                     title: "Best Leo Club Project 2023",
                     body: "Awarded for the 'Tech for Teens' mentorship initiative.",
-                    icon: <Award className="w-8 h-8 text-orange-400" />,
+                    icon: <Award className="w-8 h-8 text-orange-400" aria-hidden="true" />,
                 },
                 {
                     title: "Leo Excellence Award",
                     body: "Recognizing our president for outstanding leadership qualities.",
-                    icon: <Heart className="w-8 h-8 text-red-500" />,
+                    icon: <Heart className="w-8 h-8 text-red-500" aria-hidden="true" />,
                 },
             ],
             activities: [
@@ -132,7 +132,8 @@ const App = () => {
                 setCurrentPage(page);
                 setIsMenuOpen(false);
             }}
-            className={`px-4 py-2 text-sm font-medium transition-colors ${currentPage === page ? "border-b-2 border-white" : "hover:opacity-80"
+            aria-current={currentPage === page ? "page" : undefined}
+            className={`px-4 py-2 text-sm font-medium transition-colors rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 ${currentPage === page ? "border-b-2 border-white" : "hover:opacity-80"
                 }`}
         >
             {label}
@@ -148,14 +149,16 @@ const App = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-20 items-center">
                         {/* Logo Section */}
-                        <div
-                            className="flex items-center space-x-3 cursor-pointer"
+                        <button
+                            className="flex items-center space-x-3 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 rounded-xl p-1 -ml-1"
                             onClick={() => setCurrentPage("home")}
+                            aria-label="Return to home page"
                         >
                             <div className="bg-white p-2 rounded-xl shadow-inner">
                                 <Users
                                     className={`w-6 h-6 ${activeTab === "lions" ? "text-blue-900" : "text-red-800"
                                         }`}
+                                    aria-hidden="true"
                                 />
                             </div>
                             <div>
@@ -168,7 +171,7 @@ const App = () => {
                                     {currentClub.slogan}
                                 </span>
                             </div>
-                        </div>
+                        </button>
 
                         {/* Desktop Nav */}
                         <div className="hidden lg:flex items-center space-x-2">
@@ -178,10 +181,11 @@ const App = () => {
                             <NavItem page="leadership" label="Leadership" />
                             <button
                                 onClick={toggleClub}
-                                className="ml-6 bg-white text-gray-900 px-5 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 hover:shadow-xl hover:scale-105 transition-all"
+                                aria-label={`Switch to ${activeTab === "lions" ? "Leos" : "Lions"}`}
+                                className="ml-6 bg-white text-gray-900 px-5 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 hover:shadow-xl hover:scale-105 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
                             >
                                 Switch to {activeTab === "lions" ? "Leos" : "Lions"}
-                                <ExternalLink className="w-3.5 h-3.5" />
+                                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                             </button>
                         </div>
 
@@ -189,9 +193,12 @@ const App = () => {
                         <div className="lg:hidden flex items-center gap-4">
                             <button
                                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                className="p-2 hover:bg-white/10 rounded-lg"
+                                aria-expanded={isMenuOpen}
+                                aria-controls="mobile-menu"
+                                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                                className="p-2 hover:bg-white/10 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                             >
-                                {isMenuOpen ? <X /> : <Menu />}
+                                {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
                             </button>
                         </div>
                     </div>
@@ -200,6 +207,7 @@ const App = () => {
                 {/* Mobile Nav Menu */}
                 {isMenuOpen && (
                     <div
+                        id="mobile-menu"
                         className={`lg:hidden ${currentClub.themeColor} border-t border-white/10 pb-6 px-4 animate-in slide-in-from-top duration-300`}
                     >
                         <div className="flex flex-col space-y-2 pt-4">
@@ -208,7 +216,8 @@ const App = () => {
                                     setCurrentPage("home");
                                     setIsMenuOpen(false);
                                 }}
-                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors"
+                                aria-current={currentPage === "home" ? "page" : undefined}
+                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                             >
                                 Home
                             </button>
@@ -217,7 +226,8 @@ const App = () => {
                                     setCurrentPage("activities");
                                     setIsMenuOpen(false);
                                 }}
-                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors"
+                                aria-current={currentPage === "activities" ? "page" : undefined}
+                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                             >
                                 Service Projects
                             </button>
@@ -226,7 +236,8 @@ const App = () => {
                                     setCurrentPage("recognition");
                                     setIsMenuOpen(false);
                                 }}
-                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors"
+                                aria-current={currentPage === "recognition" ? "page" : undefined}
+                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                             >
                                 Awards & Recognition
                             </button>
@@ -235,17 +246,19 @@ const App = () => {
                                     setCurrentPage("leadership");
                                     setIsMenuOpen(false);
                                 }}
-                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors"
+                                aria-current={currentPage === "leadership" ? "page" : undefined}
+                                className="text-left py-3 px-4 rounded-xl hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                             >
                                 Leadership
                             </button>
                             <div className="pt-4 border-t border-white/10">
                                 <button
                                     onClick={toggleClub}
-                                    className="w-full bg-white text-gray-900 px-4 py-4 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
+                                    aria-label={`Switch to ${activeTab === "lions" ? "Leos" : "Lions"}`}
+                                    className="w-full bg-white text-gray-900 px-4 py-4 rounded-xl text-sm font-bold flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-900"
                                 >
                                     Switch to {activeTab === "lions" ? "Leos" : "Lions"}
-                                    <ExternalLink className="w-4 h-4" />
+                                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
                                 </button>
                             </div>
                         </div>
@@ -268,6 +281,7 @@ const App = () => {
                                     >
                                         <ShieldCheck
                                             className={`w-4 h-4 ${currentClub.accentColor}`}
+                                            aria-hidden="true"
                                         />
                                         A District 418 Pride
                                     </div>
@@ -283,10 +297,10 @@ const App = () => {
                                         our shared humanity demands it.
                                     </p>
                                     <div className="flex flex-wrap gap-4 pt-6">
-                                        <button className="bg-white text-gray-900 px-10 py-4 rounded-full font-bold hover:shadow-2xl hover:-translate-y-1 transition-all">
+                                        <button className="bg-white text-gray-900 px-10 py-4 rounded-full font-bold hover:shadow-2xl hover:-translate-y-1 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:ring-offset-2">
                                             Join Our Pride
                                         </button>
-                                        <button className="border-2 border-white/30 backdrop-blur-sm px-10 py-4 rounded-full font-bold hover:bg-white hover:text-gray-900 transition-all">
+                                        <button className="border-2 border-white/30 backdrop-blur-sm px-10 py-4 rounded-full font-bold hover:bg-white hover:text-gray-900 transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:ring-offset-2">
                                             Support a Project
                                         </button>
                                     </div>
@@ -300,18 +314,18 @@ const App = () => {
                                             )} opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity`}
                                         ></div>
                                         <div className="w-72 h-72 md:w-96 md:h-96 bg-white/10 backdrop-blur-md rounded-[2.5rem] flex items-center justify-center p-12 border border-white/20 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                                            <Heart className="w-full h-full text-white opacity-90 animate-pulse" />
+                                            <Heart className="w-full h-full text-white opacity-90 animate-pulse" aria-hidden="true" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-                                <Users size={600} />
+                            <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none" aria-hidden="true">
+                                <Users size={600} aria-hidden="true" />
                             </div>
                         </section>
 
                         {/* Quick Stats/Philosophy */}
-                        <section className="py-24 px-4 max-w-7xl mx-auto -mt-12 relative z-20">
+                        <section aria-label="Quick Stats and Philosophy" className="py-24 px-4 max-w-7xl mx-auto -mt-12 relative z-20">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 <div className="bg-white p-10 rounded-[2rem] shadow-xl shadow-gray-200/50 border border-gray-100 hover:shadow-2xl transition-all group">
                                     <div
@@ -322,6 +336,7 @@ const App = () => {
                                             className={
                                                 activeTab === "lions" ? "text-blue-600" : "text-red-600"
                                             }
+                                            aria-hidden="true"
                                         />
                                     </div>
                                     <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
@@ -342,6 +357,7 @@ const App = () => {
                                                     ? "text-yellow-600"
                                                     : "text-orange-600"
                                             }
+                                            aria-hidden="true"
                                         />
                                     </div>
                                     <h3 className="text-2xl font-bold mb-4">Ubuntu Philosophy</h3>
@@ -355,7 +371,7 @@ const App = () => {
                                         className={`${activeTab === "lions" ? "bg-green-50" : "bg-green-50"
                                             } w-14 h-14 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform`}
                                     >
-                                        <Users className="text-green-600" />
+                                        <Users className="text-green-600" aria-hidden="true" />
                                     </div>
                                     <h3 className="text-2xl font-bold mb-4">Fellowship</h3>
                                     <p className="text-gray-600 leading-relaxed">
